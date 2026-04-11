@@ -1,14 +1,13 @@
 include_guard(GLOBAL)
 
-function(gen_gdextension_file EXTENSION_TARGET OUTPUT_DIR)
+function(write_gdextension_file EXTENSION_NAME OUTPUT_DIR)
     file(MAKE_DIRECTORY "${OUTPUT_DIR}")
 
-    set(EXTENSION_NAME "${EXTENSION_TARGET}")
-    set(EXTENSION_INIT_FUNC "extension_init")
-    set(gdextension_file "${OUTPUT_DIR}/${EXTENSION_TARGET}.gdextension")
-    set(gdextension_file_content [=[ [configuration]
+    set(ENTRY_SYMBOL "extension_init")
+    set(file_path "${OUTPUT_DIR}/${EXTENSION_NAME}.gdextension")
+    set(file_content [=[ [configuration]
 
-entry_symbol = "@EXTENSION_INIT_FUNC@"
+entry_symbol = "@ENTRY_SYMBOL@"
 compatibility_minimum = "4.5"
 reloadable = false
 
@@ -65,6 +64,6 @@ web.wasm32.single.release = "./web/lib@EXTENSION_NAME@.web.template_release.wasm
 web.wasm32.double.release = "./web/lib@EXTENSION_NAME@.web.template_release.wasm32.double.nothreads.wasm"
 ]=])
 
-    string(CONFIGURE "${gdextension_file_content}" gdextension_file_content @ONLY)
-    file(WRITE "${gdextension_file}" "${gdextension_file_content}")
+    string(CONFIGURE "${file_content}" file_content @ONLY)
+    file(WRITE "${file_path}" "${file_content}")
 endfunction()

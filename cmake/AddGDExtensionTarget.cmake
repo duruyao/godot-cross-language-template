@@ -1,6 +1,6 @@
 include_guard(GLOBAL)
 include(GDExtensionTargetLinkDocs)
-include(GenGDExtensionFile)
+include(WriteGDExtensionFile)
 
 function(add_gdextension_target EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DIR OUTPUT_DIR_PREFIX)
     add_library("${EXTENSION_NAME}" SHARED)
@@ -31,5 +31,5 @@ function(add_gdextension_target EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DI
             OUTPUT_NAME "${EXTENSION_NAME}${godotcpp_suffix}"
     )
 
-    gen_gdextension_file("${EXTENSION_NAME}" "${OUTPUT_DIR_PREFIX}/bin")
+    write_gdextension_file("${EXTENSION_NAME}" "${OUTPUT_DIR_PREFIX}/bin")
 endfunction()
