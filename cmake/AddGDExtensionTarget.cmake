@@ -25,11 +25,18 @@ function(add_gdextension_target EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DI
     get_target_property(godotcpp_platform godot::cpp GODOTCPP_PLATFORM)
     set_target_properties("${EXTENSION_NAME}"
             PROPERTIES
-            LIBRARY_OUTPUT_DIRECTORY "$<1:${OUTPUT_DIR_PREFIX}/bin/${godotcpp_platform}>"
-            RUNTIME_OUTPUT_DIRECTORY "$<1:${OUTPUT_DIR_PREFIX}/bin/${godotcpp_platform}>"
+            LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/bin/${godotcpp_platform}>"
+            RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/bin/${godotcpp_platform}>"
             PREFIX "lib"
             OUTPUT_NAME "${EXTENSION_NAME}${godotcpp_suffix}"
     )
 
-    write_gdextension_file("${EXTENSION_NAME}" "${OUTPUT_DIR_PREFIX}/bin")
+    set(gdextension_filename "${EXTENSION_NAME}.gdextension")
+    write_gdextension_file("${EXTENSION_NAME}" "${CMAKE_CURRENT_BINARY_DIR}/bin/${gdextension_filename}")
+
+    add_custom_command(TARGET "${EXTENSION_NAME}" POST_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E make_directory "${OUTPUT_DIR_PREFIX}/bin/${godotcpp_platform}"
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/bin/${gdextension_filename}" "${OUTPUT_DIR_PREFIX}/bin/${gdextension_filename}"
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${EXTENSION_NAME}>" "${OUTPUT_DIR_PREFIX}/bin/${godotcpp_platform}/$<TARGET_FILE_NAME:${EXTENSION_NAME}>"
+    )
 endfunction()

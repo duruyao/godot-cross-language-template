@@ -1,10 +1,10 @@
 include_guard(GLOBAL)
 
-function(write_gdextension_file EXTENSION_NAME OUTPUT_DIR)
-    file(MAKE_DIRECTORY "${OUTPUT_DIR}")
+function(write_gdextension_file EXTENSION_NAME FILE_PATH)
+    get_filename_component(file_dir "${FILE_PATH}" DIRECTORY)
+    file(MAKE_DIRECTORY "${file_dir}")
 
     set(ENTRY_SYMBOL "extension_init")
-    set(file_path "${OUTPUT_DIR}/${EXTENSION_NAME}.gdextension")
     set(file_content [=[ [configuration]
 
 entry_symbol = "@ENTRY_SYMBOL@"
@@ -65,5 +65,5 @@ web.wasm32.double.release = "./web/lib@EXTENSION_NAME@.web.template_release.wasm
 ]=])
 
     string(CONFIGURE "${file_content}" file_content @ONLY)
-    file(WRITE "${file_path}" "${file_content}")
+    file(WRITE "${FILE_PATH}" "${file_content}")
 endfunction()
