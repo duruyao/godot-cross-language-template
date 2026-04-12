@@ -1,8 +1,8 @@
 include_guard(GLOBAL)
-include(GDExtensionTargetLinkDocs)
+include(AddGDExtensionDocSource)
 include(WriteGDExtensionFile)
 
-function(add_gdextension_target EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DIR OUTPUT_DIR_PREFIX)
+function(add_gdextension_library EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DIR OUTPUT_DIR_PREFIX)
     add_library("${EXTENSION_NAME}" SHARED)
     file(GLOB extension_sources CONFIGURE_DEPENDS
             "${EXTENSION_SRC_DIR}/*.cc"
@@ -14,8 +14,8 @@ function(add_gdextension_target EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DI
     )
     target_sources("${EXTENSION_NAME}" PRIVATE ${extension_sources})
 
-    if(GODOTCPP_TARGET MATCHES "editor|template_debug")
-        gdextension_target_link_docs("${EXTENSION_NAME}" "${GODOTCPP_SRC_DIR}" "${EXTENSION_SRC_DIR}")
+    if("${GODOTCPP_TARGET}" MATCHES "editor|template_debug")
+        append_gdextension_doc_source("${EXTENSION_NAME}" "${GODOTCPP_SRC_DIR}" "${EXTENSION_SRC_DIR}")
     endif()
 
     target_link_libraries("${EXTENSION_NAME}" PRIVATE godot-cpp)

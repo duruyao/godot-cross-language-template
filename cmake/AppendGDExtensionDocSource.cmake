@@ -1,6 +1,6 @@
 include_guard(GLOBAL)
 
-function(gdextension_target_link_docs EXTENSION_TARGET GODOTCPP_SRC_DIR EXTENSION_DOC_DIR)
+function(append_gdextension_doc_source EXTENSION_TARGET GODOTCPP_SRC_DIR EXTENSION_DOC_DIR)
     file(GLOB_RECURSE xml_list LIST_DIRECTORIES OFF CONFIGURE_DEPENDS
             "${EXTENSION_DOC_DIR}/*.xml"
     )
@@ -9,7 +9,7 @@ function(gdextension_target_link_docs EXTENSION_TARGET GODOTCPP_SRC_DIR EXTENSIO
     endif()
 
     string(MAKE_C_IDENTIFIER "${EXTENSION_TARGET}" extension_target_id)
-    set(doc_source "${CMAKE_CURRENT_BINARY_DIR}/gen/${extension_target_id}_doc.cpp")
+    set(doc_source "${CMAKE_CURRENT_BINARY_DIR}/gen/${extension_target_id}.doc.cpp")
 
     set(python_xml_list "${xml_list}")
     list(TRANSFORM python_xml_list REPLACE "(.*\\.xml)" "'\\1'")
