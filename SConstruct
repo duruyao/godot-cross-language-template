@@ -9,7 +9,7 @@ from SCons.Script import (
     VariantDir,
 )
 
-from scons.tools import add_gdextension_library, print_error
+from tools.scons import add_gdextension_library, print_error
 
 project_root = Dir("#").abspath
 customs = [f"{project_root}/custom.py"]

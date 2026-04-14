@@ -1,15 +1,6 @@
-from pathlib import Path
 from SCons.Script import Environment
 
-from .file import write_gdextension_manifest
-
-
-def _collect_source(dir: str, *suffixes: str) -> list[str]:
-    sources = []
-    for p in Path(dir).rglob("*"):
-        if p.is_file() and p.suffix in suffixes:
-            sources.append(str(p))
-    return sources
+from .file import collect_source, write_gdextension_manifest
 
 
 def _write_manifest_action(target: any, source: any, env: Environment) -> int:
@@ -27,12 +18,12 @@ def add_gdextension_library(
 ) -> list:
     lib_env = env.Clone()
     lib_env.AppendUnique(CPPPATH=[f"{godotcpp_src_dir}/..", f"{extension_src_dir}/.."])
-    lib_source = _collect_source(extension_src_dir, ".cc", ".cpp", ".cxx")
+    lib_source = collect_source(extension_src_dir, ".cc", ".cpp", ".cxx")
 
     if lib_env["target"] in ["editor", "template_debug"]:
         doc_source = lib_env.GodotCPPDocData(
             target=f"{extension_src_dir}/{extension_name}.doc.cpp",
-            source=_collect_source(extension_src_dir, ".xml"),
+            source=collect_source(extension_src_dir, ".xml"),
         )
         lib_source.append(doc_source)
 

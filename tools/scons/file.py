@@ -1,7 +1,16 @@
 import os
+from pathlib import Path
 
 
-def write_gdextension_manifest(extension_name: str, file_path: str) -> int:
+def collect_source(dir: str, *suffixes: str) -> list[str]:
+    sources = []
+    for p in Path(dir).rglob("*"):
+        if p.is_file() and p.suffix in suffixes:
+            sources.append(str(p))
+    return sources
+
+
+def write_gdextension_manifest(extension_name: str, file_path: str) -> bool:
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     entry_symbol = "extension_init"
@@ -68,7 +77,7 @@ web.wasm32.double.release = "./web/lib{extension_name}.web.template_release.wasm
     try:
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(file_content)
-        return 0
+        return False
     except Exception as e:
         print(f"Error occurred while writing {file_path}: {e}")
-        return 1
+        return True
