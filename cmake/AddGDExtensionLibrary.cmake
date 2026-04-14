@@ -23,20 +23,22 @@ function(add_gdextension_library EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_D
 
     get_target_property(godotcpp_suffix godot::cpp GODOTCPP_SUFFIX)
     get_target_property(godotcpp_platform godot::cpp GODOTCPP_PLATFORM)
+    file(RELATIVE_PATH extension_src_dir_rel "${CMAKE_CURRENT_SOURCE_DIR}" "${EXTENSION_SRC_DIR}")
+    string(REPLACE ".universal" "" extension_suffix "${godotcpp_suffix}")
     set_target_properties("${EXTENSION_NAME}"
             PROPERTIES
-            LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${godotcpp_platform}>"
-            RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${godotcpp_platform}>"
+            LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}>"
+            RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}>"
             PREFIX "lib"
-            OUTPUT_NAME "${EXTENSION_NAME}${godotcpp_suffix}"
+            OUTPUT_NAME "${EXTENSION_NAME}${extension_suffix}"
     )
 
     set(manifest_filename "${EXTENSION_NAME}.gdextension")
-    write_gdextension_manifest("${EXTENSION_NAME}" "${CMAKE_CURRENT_BINARY_DIR}/${manifest_filename}")
+    write_gdextension_manifest("${EXTENSION_NAME}" "${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}/${manifest_filename}")
 
     add_custom_command(TARGET "${EXTENSION_NAME}" POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E make_directory "${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}"
-            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/${manifest_filename}" "${INSTALL_DIR_PREFIX}/bin/${manifest_filename}"
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}/${manifest_filename}" "${INSTALL_DIR_PREFIX}/bin/${manifest_filename}"
             COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${EXTENSION_NAME}>" "${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}/$<TARGET_FILE_NAME:${EXTENSION_NAME}>"
     )
 endfunction()

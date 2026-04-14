@@ -9,7 +9,8 @@ function(append_gdextension_doc_source EXTENSION_TARGET GODOTCPP_SRC_DIR EXTENSI
     endif()
 
     string(MAKE_C_IDENTIFIER "${EXTENSION_TARGET}" extension_target_id)
-    set(doc_source "${CMAKE_CURRENT_BINARY_DIR}/${extension_target_id}.doc.cpp")
+    file(RELATIVE_PATH extension_doc_dir_rel "${CMAKE_CURRENT_SOURCE_DIR}" "${EXTENSION_DOC_DIR}")
+    set(doc_source "${CMAKE_CURRENT_BINARY_DIR}/${extension_doc_dir_rel}/${extension_target_id}.doc.cpp")
 
     set(python_xml_list "${xml_list}")
     list(TRANSFORM python_xml_list REPLACE "(.*\\.xml)" "'\\1'")
