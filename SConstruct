@@ -1,78 +1,48 @@
-#!/usr/bin/env python3
-
-import os
 import sys
+from pathlib import Path
 
 from SCons.Script import (
-    ARGUMENTS,
     Default,
+    Dir,
     Environment,
-    Glob,
-    Help,
     SConscript,
-    Variables,
+    VariantDir,
 )
 
-from scons_support import error
+from scons.tools import add_gdextension_library, print_error
 
-libname = "EXTENSION-NAME"
-projectdir = "project"
+project_root = Dir("#").abspath
+customs = [f"{project_root}/custom.py"]
+build_dir = f"{project_root}/scons-build"
+godotcpp_module_path = "third_party/godot-cpp"
 
-localEnv = Environment(tools=["default"], PLATFORM="")
+if not Path(f"{project_root}/{godotcpp_module_path}/src").is_dir():
+    print_error(f"""godot-cpp bindings source not found.
+Run the following command to initialize/update the godot-cpp submodule:
 
-# Build profiles can be used to decrease compile times.
-# You can either specify "disabled_classes", OR
-# explicitly specify "enabled_classes" which disables all other classes.
-# Modify the example file as needed and uncomment the line below or
-# manually specify the build_profile parameter when running SCons.
-
-# localEnv["build_profile"] = "build_profile.json"
-
-customs = ["custom.py"]
-customs = [os.path.abspath(path) for path in customs]
-
-opts = Variables(customs, ARGUMENTS)
-opts.Update(localEnv)
-
-Help(opts.GenerateHelpText(localEnv))
-
-env = localEnv.Clone()
-
-if not (os.path.isdir("godot-cpp") and os.listdir("godot-cpp")):
-    error("""godot-cpp is not available within this folder, as Git submodules haven't been initialized.
-Run the following command to download godot-cpp:
-
-    git submodule update --init --recursive""")
+    git submodule update --init --recursive {godotcpp_module_path}""")
     sys.exit(1)
 
-env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
-
-env.Append(CPPPATH=["src/"])
-sources = Glob("src/*.cpp")
-
-if env["target"] in ["editor", "template_debug"]:
-    try:
-        doc_data = env.GodotCPPDocData(
-            "src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml")
-        )
-        sources.append(doc_data)
-    except AttributeError:
-        print("Not including class reference as we're targeting a pre-4.3 baseline.")
-
-# .dev doesn't inhibit compatibility, so we don't need to key it.
-# .universal just means "compatible with all relevant arches" so we don't need to key it.
-suffix = env["suffix"].replace(".dev", "").replace(".universal", "")
-
-lib_filename = "{}{}{}{}".format(
-    env.subst("$SHLIBPREFIX"), libname, suffix, env.subst("$SHLIBSUFFIX")
+VariantDir(build_dir, project_root, duplicate=False)
+env = Environment(tools=["default"], PLATFORM="").Clone()
+env = SConscript(
+    f"{build_dir}/{godotcpp_module_path}/SConstruct", {"env": env, "customs": customs}
 )
 
-library = env.SharedLibrary(
-    "bin/{}/{}".format(env["platform"], lib_filename),
-    source=sources,
+targets = []
+targets += add_gdextension_library(
+    extension_name="foo",
+    godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
+    extension_src_dir=f"{build_dir}/src/extensions/foo",
+    install_prefix=f"{project_root}/project",
+    env=env,
+)
+targets += add_gdextension_library(
+    extension_name="bar",
+    godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
+    extension_src_dir=f"{build_dir}/src/extensions/bar",
+    install_prefix=f"{project_root}/project",
+    env=env,
 )
 
-copy = env.Install("{}/bin/{}/".format(projectdir, env["platform"]), library)
-
-default_args = [library, copy]
-Default(*default_args)
+Default(*targets)
