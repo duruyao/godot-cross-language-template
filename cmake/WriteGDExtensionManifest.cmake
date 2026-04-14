@@ -1,6 +1,6 @@
 include_guard(GLOBAL)
 
-function(write_gdextension_file EXTENSION_NAME FILE_PATH)
+function(write_gdextension_manifest EXTENSION_NAME FILE_PATH)
     get_filename_component(file_dir "${FILE_PATH}" DIRECTORY)
     file(MAKE_DIRECTORY "${file_dir}")
 

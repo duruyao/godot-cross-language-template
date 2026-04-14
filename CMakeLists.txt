@@ -14,10 +14,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(CMAKE_C_COMPILER)
 endif()
 
-set(GODOTCPP_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/godot-cpp" CACHE PATH "Path to godot-cpp source directory")
-file(RELATIVE_PATH godotcpp_submodule_path "${CMAKE_CURRENT_SOURCE_DIR}" "${GODOTCPP_SRC_DIR}")
+set(godotcpp_submodule_path "third_party/godot-cpp")
+set(godotcpp_src_dir "${CMAKE_CURRENT_SOURCE_DIR}/${godotcpp_submodule_path}")
 
-if(NOT EXISTS "${GODOTCPP_SRC_DIR}/src")
+if(NOT EXISTS "${godotcpp_src_dir}/src")
     message(NOTICE "godot-cpp bindings source not found")
     message(NOTICE "initializing/updating the godot-cpp submodule...")
 
@@ -28,8 +28,19 @@ if(NOT EXISTS "${GODOTCPP_SRC_DIR}/src")
     )
 endif()
 
-list(APPEND CMAKE_MODULE_PATH "${GODOTCPP_SRC_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${godotcpp_src_dir}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-add_subdirectory("${GODOTCPP_SRC_DIR}")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src/extensions")
+add_subdirectory("${godotcpp_src_dir}")
+
+include(AddGDExtensionLibrary)
+add_gdextension_library(foo
+        "${godotcpp_src_dir}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/foo"
+        "${PROJECT_SOURCE_DIR}/project"
+)
+add_gdextension_library(bar
+        "${godotcpp_src_dir}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/bar"
+        "${PROJECT_SOURCE_DIR}/project"
+)
