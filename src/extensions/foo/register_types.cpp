@@ -3,8 +3,8 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "foo.hpp"
-#include "register_types.hpp"
+#include "foo/foo.hpp"
+#include "foo/register_types.hpp"
 
 using namespace godot;
 

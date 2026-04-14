@@ -1,4 +1,4 @@
-#include "bar.hpp"
+#include "bar/bar.hpp"
 
 void Bar::_bind_methods() {
 	godot::ClassDB::bind_method(D_METHOD("print_type", "variant"), &Bar::print_type);

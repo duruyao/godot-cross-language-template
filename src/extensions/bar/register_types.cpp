@@ -3,8 +3,8 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "bar.hpp"
-#include "register_types.hpp"
+#include "bar/bar.hpp"
+#include "bar/register_types.hpp"
 
 using namespace godot;
 
