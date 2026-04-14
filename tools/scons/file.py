@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 
-def collect_source(dir: str, *suffixes: str) -> list[str]:
+def collect_sources(dir: str, *suffixes: str) -> list[str]:
     sources = []
     for p in Path(dir).rglob("*"):
         if p.is_file() and p.suffix in suffixes:

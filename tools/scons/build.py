@@ -1,6 +1,6 @@
 from SCons.Script import Environment
 
-from .file import collect_source, write_gdextension_manifest
+from .file import collect_sources, write_gdextension_manifest
 
 
 def _write_manifest_action(target: any, source: any, env: Environment) -> int:
@@ -13,19 +13,19 @@ def add_gdextension_library(
     extension_name: str,
     godotcpp_src_dir: str,
     extension_src_dir: str,
-    install_prefix: str,
+    install_dir_prefix: str,
     env: Environment,
 ) -> list:
     lib_env = env.Clone()
     lib_env.AppendUnique(CPPPATH=[f"{godotcpp_src_dir}/..", f"{extension_src_dir}/.."])
-    lib_source = collect_source(extension_src_dir, ".cc", ".cpp", ".cxx")
+    lib_sources = collect_sources(extension_src_dir, ".cc", ".cpp", ".cxx")
 
     if lib_env["target"] in ["editor", "template_debug"]:
         doc_source = lib_env.GodotCPPDocData(
             target=f"{extension_src_dir}/{extension_name}.doc.cpp",
-            source=collect_source(extension_src_dir, ".xml"),
+            source=collect_sources(extension_src_dir, ".xml"),
         )
-        lib_source.append(doc_source)
+        lib_sources.append(doc_source)
 
     lib_filename = "{}{}{}{}".format(
         lib_env.subst("$SHLIBPREFIX"),
@@ -36,11 +36,11 @@ def add_gdextension_library(
 
     lib = lib_env.SharedLibrary(
         target=f"{extension_src_dir}/{lib_filename}",
-        source=lib_source,
+        source=lib_sources,
     )
 
     lib_install = lib_env.Install(
-        target=f"{install_prefix}/bin/{lib_env['platform']}",
+        target=f"{install_dir_prefix}/bin/{lib_env['platform']}",
         source=lib,
     )
 
@@ -52,7 +52,7 @@ def add_gdextension_library(
     )
 
     manifest_install = lib_env.Install(
-        target=f"{install_prefix}/bin",
+        target=f"{install_dir_prefix}/bin",
         source=manifest,
     )
 

@@ -34,14 +34,14 @@ targets += add_gdextension_library(
     extension_name="foo",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/foo",
-    install_prefix=f"{project_root}/project",
+    install_dir_prefix=f"{project_root}/project",
     env=env,
 )
 targets += add_gdextension_library(
     extension_name="bar",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/bar",
-    install_prefix=f"{project_root}/project",
+    install_dir_prefix=f"{project_root}/project",
     env=env,
 )
 
