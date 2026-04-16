@@ -1,0 +1,92 @@
+[tool.commitizen]
+name = "cz_customize"
+tag_format = "$version"
+version_scheme = "semver2"
+version = "0.0.1"
+update_changelog_on_bump = true
+major_version_zero = true
+
+[tool.commitizen.customize]
+commit_parser = "^((?P<change_type>feat|fix|refactor|perf|BREAKING CHANGE)(?:\\((?P<scope>[^()\\r\\n]*)\\)|\\()?(?P<breaking>!)?|\\w+!):\\s(?P<message>.*)?"
+change_type_map = { feat = "Feat", fix = "Fix", refactor = "Refactor", perf = "Perf", chore = "Chore", revert = "Revert" }
+schema = "<type>(<scope>): <subject>\n<BLANK LINE>\n<body>\n<BLANK LINE>\n(BREAKING CHANGE: )<footer>"
+schema_pattern = "(?s)(build|bump|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\(\\S+\\))?!?: ([^\\n\\r]+)((\\n\\n.*)|(\\s*))?$"
+example = "fix: correct minor typos in code\n\nsee the issue for details on the typos fixed\n\ncloses issue #12"
+info = """
+The commit contains the following structural elements, to communicate
+intent to the consumers of your library:
+
+fix: a commit of the type fix patches a bug in your codebase
+(this correlates with PATCH in semantic versioning).
+
+feat: a commit of the type feat introduces a new feature to the codebase
+(this correlates with MINOR in semantic versioning).
+
+BREAKING CHANGE: a commit that has the text BREAKING CHANGE: at the beginning of
+its optional body or footer section introduces a breaking API change
+(correlating with MAJOR in semantic versioning).
+A BREAKING CHANGE can be part of commits of any type.
+
+Others: commit types other than fix: and feat: are allowed,
+like chore:, docs:, style:, refactor:, perf:, test:, and others.
+
+We also recommend improvement for commits that improve a current
+implementation without adding a new feature or fixing a bug.
+
+Notice these types are not mandated by the conventional commits specification,
+and have no implicit effect in semantic versioning (unless they include a BREAKING CHANGE).
+
+A scope may be provided to a commit’s type, to provide additional contextual
+information and is contained within parenthesis, e.g., feat(parser): add ability to parse arrays.
+
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer]
+"""
+message_template = "{{prefix}}{% if scope %}({{scope}}){% endif %}{% if is_breaking_change and breaking_change_exclamation_in_title %}!{% endif %}: {{subject}}{% if body %}\n\n{{body}}{% endif %}{% if is_breaking_change %}\n\nBREAKING CHANGE: {{footer}}{% elif footer %}\n\n{{footer}}{% endif %}"
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "prefix"
+message = "Select the type of change you are committing"
+choices = [
+  { value = "feat", name = "feat: A new feature. Correlates with MINOR in SemVer", key = "f" },
+  { value = "fix", name = "fix: A bug fix. Correlates with PATCH in SemVer", key = "x" },
+  { value = "docs", name = "docs: Documentation only changes", key = "d" },
+  { value = "refactor", name = "refactor: A code change that neither fixes a bug nor adds a feature", key = "r" },
+  { value = "perf", name = "perf: A code change that improves performance", key = "p" },
+  { value = "test", name = "test: Adding missing tests or correcting existing tests", key = "t" },
+  { value = "build", name = "build: Changes that affect the build system or external dependencies (example scopes: pip, docker, npm)", key = "b" },
+  { value = "ci", name = "ci: Changes to CI configuration files and scripts (example scopes: GitLabCI)", key = "c" },
+  { value = "chore", name = "chore: Other changes that don't modify src or test files (maintenance, tooling, housekeeping)" },
+  { value = "revert", name = "revert: Reverts a previous commit" },
+  { value = "style", name = "style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)", key = "s" },
+]
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "scope"
+message = "What is the scope of this change? (class or file name): (press [enter] to skip)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "subject"
+message = "Write a short and imperative summary of the code changes: (lower case and no period)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "body"
+message = "Provide additional contextual information about the code changes: (press [enter] to skip)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "confirm"
+name = "is_breaking_change"
+message = "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer"
+default = false
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "footer"
+message = "Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)\n"
