@@ -2,9 +2,11 @@ import sys
 from pathlib import Path
 
 from SCons.Script import (
+    ARGUMENTS,
     Default,
     Dir,
     Environment,
+    Help,
     SConscript,
     VariantDir,
 )
@@ -13,8 +15,16 @@ from scons.extension import add_gdextension_library, print_error
 
 project_root = Dir("#").abspath
 customs = [f"{project_root}/custom.py"]
-build_dir = f"{project_root}/scons-build"
+build_dir_default = "scons-build"
+build_dir_actual = ARGUMENTS.get("build_dir", build_dir_default)
+build_dir = str(Path(build_dir_actual).resolve(strict=False))
 godotcpp_module_path = "third_party/godot-cpp"
+
+Help(f"""
+build_dir: Path to build directory
+    default: {build_dir_default}
+    actual: {build_dir_actual}
+""")
 
 if not Path(f"{project_root}/{godotcpp_module_path}/src").is_dir():
     print_error(f"""godot-cpp bindings source not found.
