@@ -1,0 +1,16 @@
+{
+    "files.autoSave": "afterDelay",
+    "chat.mcp.gallery.enabled": true,
+    "editor.formatOnSave": true,
+    "chatgpt.composerEnterBehavior": "cmdIfMultiline",
+    "terminal.integrated.cursorStyle": "line",
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+        "editor.wordWrap": "off"
+    },
+    "editor.wordWrapColumn": 120,
+    "python.terminal.activateEnvironment": false,
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    }
+}

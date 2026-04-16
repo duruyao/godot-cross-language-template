@@ -1,6 +1,13 @@
 {
     "recommendations": [
         "ms-vscode.cpptools-extension-pack",
-        "ms-python.python"
+        "xaver.clang-format",
+        "wysaid.clion-cmake-format",
+        "openai.chatgpt",
+        "geequlim.godot-tools",
+        "yzhang.markdown-all-in-one",
+        "shd101wyy.markdown-preview-enhanced",
+        "ms-python.python",
+        "charliermarsh.ruff"
     ]
 }
