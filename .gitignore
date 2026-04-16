@@ -1,62 +1,64 @@
-# Godot auto generated files
-*.gen.*
+# Godot 4+ specific ignores
 .godot/
+.nomedia
+/android/
 
-# Ignore library files but not the gdextension file
-project/bin/*
-!project/bin/android
-project/bin/android/*
-!project/bin/android/.gitkeep
-!project/bin/linux
-project/bin/linux/*
-!project/bin/linux/.gitkeep
-!project/bin/macos
-project/bin/macos/*
-!project/bin/macos/.gitkeep
-!project/bin/windows
-project/bin/windows/*
-!project/bin/windows/.gitkeep
-!project/bin/*.gdextension
-.sconsign*.dblite
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
 
-# Ignore custom.py
-custom.py
+# Imported translations (automatically generated from CSV files)
+*.translation
 
-# Ignore generated compile_commands.json
-compile_commands.json
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
 
-# Ignore files generated for documentation
-/src/gen
+# GDExtension-specific ignores
+bin/
+*.gdextension
 
-# Binaries
-*.o
-*.os
-*.so
-*.obj
-*.bc
-*.pyc
-*.dblite
-*.pdb
-*.lib
-*.config
-*.creator
-*.creator.user
-*.files
-*.includes
-*.idb
-*.exp
-
-# Other stuff
-*.log
-
-# VSCode
-.vscode/*
-!.vscode/extensions.json
+# macOS-specific ignores
 .DS_Store
 
-# Jetbrains
-.idea/
+# Build system ignores
+*build*/
+compile_commands.json
 
-# Cmake
-cmake-build*
+# Scons-specific ignores
+custom.py
+.sconsign.dblite
+
+# CMake-specific ignores
 CMakeUserPresets.json
+
+# Python-specific ignores
+.venv/
+__pycache__/
+
+# C++ specific ignores
+*.d
+*.slo
+*.lo
+*.o
+*.obj
+*.gch
+*.pch
+*.ilk
+*.pdb
+*.so
+*.dylib
+*.dll
+*.so.*
+*.mod
+*.smod
+*.lai
+*.la
+*.a
+*.lib
+*.exe
+*.out
+*.app
