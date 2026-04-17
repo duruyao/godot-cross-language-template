@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -28,6 +29,10 @@ customs = [f"{project_root}/custom.py"]
 build_dir = str(Path(env["build_dir"]).resolve(strict=False))
 godotcpp_module_path = "third_party/godot-cpp"
 
+os.makedirs(build_dir, exist_ok=True)
+with open(f"{build_dir}/.gdignore", "w") as f:
+    f.write("")
+
 if not Path(f"{project_root}/{godotcpp_module_path}/src").is_dir():
     print_error(f"""godot-cpp bindings source not found.
 Run the following command to initialize/update the godot-cpp submodule:
@@ -46,14 +51,14 @@ targets += add_gdextension_library(
     extension_name="foo",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/foo",
-    install_dir_prefix=f"{project_root}/project",
+    install_dir_prefix=f"{project_root}",
     env=env,
 )
 targets += add_gdextension_library(
     extension_name="bar",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/bar",
-    install_dir_prefix=f"{project_root}/project",
+    install_dir_prefix=f"{project_root}",
     env=env,
 )
 

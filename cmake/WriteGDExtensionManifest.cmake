@@ -1,11 +1,12 @@
-include_guard(GLOBAL)
+if(NOT EXTENSION_NAME OR NOT FILE_PATH)
+    message(FATAL_ERROR "'EXTENSION_NAME' and 'FILE_PATH' must not be empty")
+endif()
 
-function(write_gdextension_manifest EXTENSION_NAME FILE_PATH)
-    get_filename_component(file_dir "${FILE_PATH}" DIRECTORY)
-    file(MAKE_DIRECTORY "${file_dir}")
+get_filename_component(file_dir "${FILE_PATH}" DIRECTORY)
+file(MAKE_DIRECTORY "${file_dir}")
 
-    set(ENTRY_SYMBOL "extension_init")
-    set(file_content [=[ [configuration]
+set(ENTRY_SYMBOL "extension_init")
+set(file_content [=[ [configuration]
 
 entry_symbol = "@ENTRY_SYMBOL@"
 compatibility_minimum = "4.5"
@@ -64,6 +65,5 @@ web.wasm32.single.release = "./web/lib@EXTENSION_NAME@.web.template_release.wasm
 web.wasm32.double.release = "./web/lib@EXTENSION_NAME@.web.template_release.wasm32.double.nothreads.wasm"
 ]=])
 
-    string(CONFIGURE "${file_content}" file_content @ONLY)
-    file(WRITE "${FILE_PATH}" "${file_content}")
-endfunction()
+string(CONFIGURE "${file_content}" file_content @ONLY)
+file(WRITE "${FILE_PATH}" "${file_content}")

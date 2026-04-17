@@ -1,6 +1,6 @@
 include_guard(GLOBAL)
 include(AppendGDExtensionDocSource)
-include(WriteGDExtensionManifest)
+set(current_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 function(add_gdextension_library EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_DIR INSTALL_DIR_PREFIX)
     add_library("${EXTENSION_NAME}" SHARED)
@@ -19,26 +19,26 @@ function(add_gdextension_library EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_D
     endif()
 
     target_link_libraries("${EXTENSION_NAME}" PRIVATE godot-cpp)
-    target_include_directories("${EXTENSION_NAME}" PRIVATE "${GODOTCPP_SRC_DIR}/.." "${EXTENSION_SRC_DIR}/..")
+    target_include_directories("${EXTENSION_NAME}" PRIVATE "${GODOTCPP_SRC_DIR}" "${GODOTCPP_SRC_DIR}/include" "${EXTENSION_SRC_DIR}/..")
 
     get_target_property(godotcpp_suffix godot::cpp GODOTCPP_SUFFIX)
     get_target_property(godotcpp_platform godot::cpp GODOTCPP_PLATFORM)
-    file(RELATIVE_PATH extension_src_dir_rel "${CMAKE_CURRENT_SOURCE_DIR}" "${EXTENSION_SRC_DIR}")
     string(REPLACE ".universal" "" extension_suffix "${godotcpp_suffix}")
     set_target_properties("${EXTENSION_NAME}"
             PROPERTIES
-            LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}>"
-            RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}>"
+            LIBRARY_OUTPUT_DIRECTORY "$<1:${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}>"
+            RUNTIME_OUTPUT_DIRECTORY "$<1:${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}>"
             PREFIX "lib"
             OUTPUT_NAME "${EXTENSION_NAME}${extension_suffix}"
     )
 
-    set(manifest_filename "${EXTENSION_NAME}.gdextension")
-    write_gdextension_manifest("${EXTENSION_NAME}" "${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}/${manifest_filename}")
-
-    add_custom_command(TARGET "${EXTENSION_NAME}" POST_BUILD
-            COMMAND "${CMAKE_COMMAND}" -E make_directory "${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}"
-            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/${extension_src_dir_rel}/${manifest_filename}" "${INSTALL_DIR_PREFIX}/bin/${manifest_filename}"
-            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${EXTENSION_NAME}>" "${INSTALL_DIR_PREFIX}/bin/${godotcpp_platform}/$<TARGET_FILE_NAME:${EXTENSION_NAME}>"
+    set(manifest_path "${INSTALL_DIR_PREFIX}/bin/${EXTENSION_NAME}.gdextension")
+    add_custom_command(OUTPUT "${manifest_path}"
+            COMMAND "${CMAKE_COMMAND}"
+            "-DEXTENSION_NAME=${EXTENSION_NAME}"
+            "-DFILE_PATH=${manifest_path}"
+            -P "${current_dir}/WriteGDExtensionManifest.cmake"
+            VERBATIM
     )
+    add_custom_target("${EXTENSION_NAME}_manifest" ALL DEPENDS "${manifest_path}")
 endfunction()

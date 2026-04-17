@@ -15,6 +15,8 @@ set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for
 if(CMAKE_C_COMPILER)
 endif()
 
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/.gdignore" "")
+
 set(godotcpp_submodule_path "third_party/godot-cpp")
 set(godotcpp_src_dir "${CMAKE_CURRENT_SOURCE_DIR}/${godotcpp_submodule_path}")
 
@@ -38,10 +40,10 @@ include(AddGDExtensionLibrary)
 add_gdextension_library(foo
         "${godotcpp_src_dir}"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/foo"
-        "${PROJECT_SOURCE_DIR}/project"
+        "${PROJECT_SOURCE_DIR}"
 )
 add_gdextension_library(bar
         "${godotcpp_src_dir}"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/bar"
-        "${PROJECT_SOURCE_DIR}/project"
+        "${PROJECT_SOURCE_DIR}"
 )
