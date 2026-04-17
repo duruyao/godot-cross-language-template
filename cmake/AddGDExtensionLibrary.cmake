@@ -19,7 +19,7 @@ function(add_gdextension_library EXTENSION_NAME GODOTCPP_SRC_DIR EXTENSION_SRC_D
     endif()
 
     target_link_libraries("${EXTENSION_NAME}" PRIVATE godot-cpp)
-    target_include_directories("${EXTENSION_NAME}" PRIVATE "${GODOTCPP_SRC_DIR}" "${GODOTCPP_SRC_DIR}/include" "${EXTENSION_SRC_DIR}/..")
+    target_include_directories("${EXTENSION_NAME}" PRIVATE "${GODOTCPP_SRC_DIR}" "${GODOTCPP_SRC_DIR}/include" "${GODOTCPP_SRC_DIR}/gen/include" "${EXTENSION_SRC_DIR}/..")
 
     get_target_property(godotcpp_suffix godot::cpp GODOTCPP_SUFFIX)
     get_target_property(godotcpp_platform godot::cpp GODOTCPP_PLATFORM)

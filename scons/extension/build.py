@@ -15,6 +15,7 @@ def add_gdextension_library(
         CPPPATH=[
             f"{godotcpp_src_dir}",
             f"{godotcpp_src_dir}/include",
+            f"{godotcpp_src_dir}/gen/include",
             f"{extension_src_dir}/..",
         ]
     )
