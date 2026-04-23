@@ -23,7 +23,7 @@ def add_gdextension_library(
 
     if lib_env["target"] in ["editor", "template_debug"]:
         doc_source = lib_env.GodotCPPDocData(
-            target=f"{extension_src_dir}/{extension_name}.doc.cpp",
+            target=f"{extension_src_dir}/gen/{extension_name}.doc.cpp",
             source=env.Glob(f"{extension_src_dir}/*.xml"),
         )
         lib_sources.append(doc_source)
