@@ -12,7 +12,10 @@ from SCons.Script import (
     VariantDir,
 )
 
-from scons.extension import add_gdextension_library, print_error
+from scons import (
+    add_gdextension_library,
+    print_error,
+)
 
 
 vars = Variables()
