@@ -7,15 +7,15 @@
 using namespace godot;
 
 class Bar : public RefCounted {
-	GDCLASS(Bar, RefCounted)
+    GDCLASS(Bar, RefCounted)
 
 protected:
-	static void _bind_methods();
+    static void _bind_methods();
 
 public:
-	Bar() = default;
-	~Bar() override = default;
+    Bar() = default;
+    ~Bar() override = default;
 
-	void print_type(const Variant &p_variant) const;
-	void say_hello(const String &p_sb) const;
+    void print_type(const Variant &p_variant) const;
+    void say_hello(const String &p_sb) const;
 };

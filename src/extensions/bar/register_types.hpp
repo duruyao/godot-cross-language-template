@@ -4,4 +4,4 @@
 void initialize_gdextension_types(ModuleInitializationLevel);
 void uninitialize_gdextension_types(ModuleInitializationLevel);
 
-#endif //BAR_REGISTER_TYPES_HPP
+#endif // BAR_REGISTER_TYPES_HPP
