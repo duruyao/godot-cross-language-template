@@ -5,5 +5,5 @@ extends Node
 func _ready() -> void:
 	var foo = Foo.new()
 	var bar = Bar.new()
-	foo.print_type(foo)
-	bar.print_type(bar)
+	foo.say_hello(bar.get_class())
+	bar.say_hello(foo.get_class())

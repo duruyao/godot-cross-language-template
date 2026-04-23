@@ -17,4 +17,5 @@ public:
 	~Bar() override = default;
 
 	void print_type(const Variant &p_variant) const;
+	void say_hello(const String &p_sb) const;
 };
