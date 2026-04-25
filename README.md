@@ -17,32 +17,32 @@ To use this template, log in to GitHub and click the green `Use this template` b
 Initialize the submodule [third-party/godot-cpp](third-party/godot-cpp).
 
 ```shell
-# git submodule init
+# git: init submodule
 git submodule update --init --recursive third-party/godot-cpp
 ```
 
 Build multiple C++ GDExtension libraries via SCons.
 
 ```shell
-# scons debug build
+# scons: build debug target
 scons build_dir=scons-build-template_debug target=template_debug debug_symbols=yes
 ```
 
 ```shell
-# scons release build
+# scons: build release target
 scons build_dir=scons-build-template_release target=template_release debug_symbols=no
 ```
 
 Build multiple C++ GDExtension libraries via CMake.
 
 ```shell
-# cmake debug build
+# cmake: build debug target
 cmake -S . -B cmake-build-template_debug -DGODOTCPP_TARGET=template_debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build cmake-build-template_debug -j 8
 ```
 
 ```shell
-# cmake release build
+# cmake: build release target
 cmake -S . -B cmake-build-template_release -DGODOTCPP_TARGET=template_release -DCMAKE_BUILD_TYPE=Release
 cmake --build cmake-build-template_release -j 8
 ```
@@ -50,12 +50,12 @@ cmake --build cmake-build-template_release -j 8
 Launch the godot editor or run the project.
 
 ```shell
-# launch godot editor only
+# godot: open project in editor
 godot --path . --editor
 ```
 
 ```shell
-# run godot project only
+# godot: run project without opening editor
 godot --path .
 ```
 
