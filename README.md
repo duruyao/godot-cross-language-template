@@ -66,10 +66,18 @@ Hello Foo, I am Bar.
 
 ### Configuring IDE
 
-You can develop your own extension with any text editor and by invoking scons on the command line, but if you want to work with an IDE (Integrated Development Environment), you can use a compilation database file called `compile_commands.json`. Most IDEs should automatically identify this file, and self-configure appropriately.
-To generate the database file, you can run one of the following commands in the project root directory:
+If you want to work with an IDE (Integrated Development Environment), you can use a compilation database file called `compile_commands.json`. Most IDEs should automatically identify this file, and self-configure appropriately. To generate the database file, you can run the following commands:
 
 ```shell
 # scons: generate compile_commands.json without building
 scons compiledb=yes compile_commands.json
+```
+
+
+[Visual Studio Code](https://code.visualstudio.com/) needs the environment variable `GODOT4_EXECUTABLE` to be set to the path of the Godot 4 executable. You can set this environment variable in your shell configuration file (e.g., `.bashrc`, `.zshrc`, etc.):
+
+```shell
+# shell: set godot 4 executable path environment variable
+echo 'export GODOT4_EXECUTABLE="/path/to/godot/executable"\n' >> ~/.zprofile
+source ~/.zprofile
 ```
