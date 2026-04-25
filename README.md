@@ -70,6 +70,6 @@ You can develop your own extension with any text editor and by invoking scons on
 To generate the database file, you can run one of the following commands in the project root directory:
 
 ```shell
-# generate compile_commands.json only
+# scons: generate compile_commands.json without building
 scons compiledb=yes compile_commands.json
 ```
