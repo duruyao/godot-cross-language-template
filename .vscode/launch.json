@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Open Godot4 Editor",
+            "name": "Open Godot Editor",
             "type": "node",
             "request": "launch",
             "runtimeExecutable": "/bin/zsh",

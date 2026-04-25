@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Godot4: open project",
+            "label": "Godot: open project",
             "type": "shell",
             "command": "\"${env:GODOT4_EXECUTABLE}\"",
             "args": [
