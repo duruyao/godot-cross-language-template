@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Open Godot4 Editor",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "/bin/zsh",
+            "runtimeArgs": [
+                "-lc",
+                "nohup \"${env:GODOT4_EXECUTABLE}\" --path \"${workspaceFolder}\" --editor >/dev/null 2>&1 < /dev/null &"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}

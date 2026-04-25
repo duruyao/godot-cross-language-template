@@ -12,5 +12,13 @@
     "python.terminal.activateEnvironment": false,
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
-    }
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false
+    },
+    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}",
+    "task.allowAutomaticTasks": "on"
 }

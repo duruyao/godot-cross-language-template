@@ -1,5 +1,6 @@
 {
     "recommendations": [
+        "GitHub.copilot-chat",
         "ms-vscode.cpptools-extension-pack",
         "xaver.clang-format",
         "wysaid.clion-cmake-format",
