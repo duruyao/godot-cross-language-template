@@ -6,7 +6,7 @@
     "terminal.integrated.cursorStyle": "line",
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-        "editor.wordWrap": "off"
+        "editor.wordWrap": "on"
     },
     "editor.wordWrapColumn": 120,
     "python.terminal.activateEnvironment": false,
@@ -19,6 +19,5 @@
         "markdown": true,
         "scminput": false
     },
-    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}",
-    "task.allowAutomaticTasks": "on"
+    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}"
 }
