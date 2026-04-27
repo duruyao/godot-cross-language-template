@@ -2,7 +2,7 @@
 
 This repository serves as a quickstart cross-language template for GDExtension development with Godot 4.0+.
 
-## 1. Introduction
+## 1. Repository Layout
 
 - The [third-party/godot-cpp](third-party/godot-cpp) as a submodule is the official C++ GDExtension binding.
 - The [src/extensions](src/extensions) directory contains source files for multiple C++ GDExtension libraries.
@@ -10,7 +10,7 @@ This repository serves as a quickstart cross-language template for GDExtension d
 - The [CMakeLists.txt](CMakeLists.txt) as a secondary build system for multiple C++ GDExtension libraries.
 - The [src](src) directory (excluding [src/extensions](src/extensions)) contains source files (`.cs`, `.gd`, `.gdshader`, `.tscn`) for the Godot project.
 
-## 2. Build C++ GDExtension Libraries
+## 2. Building C++ GDExtension Libraries
 
 To use this template, log in to GitHub and click the green `Use this template` button at the top of the repository page. This will let you create a copy of this repository with a clean git history.
 
@@ -50,7 +50,7 @@ cmake -S . -B cmake-build-template_release -DGODOTCPP_TARGET=template_release -D
 cmake --build cmake-build-template_release -j 8
 ```
 
-## 3. Run Godot Project
+## 3. Running the Godot Project
 
 Launch the godot editor or run the project directly.
 
@@ -69,7 +69,7 @@ Hello Bar, I am Foo.
 Hello Foo, I am Bar.
 ```
 
-## 4. Configure IDE
+## 4. Configuring the IDE
 
 If you want to work with an IDE, you can use a compilation database file called `compile_commands.json`. Most IDEs should automatically identify this file, and self-configure appropriately. To generate the database file, you can run the following commands:
 
