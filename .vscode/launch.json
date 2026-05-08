@@ -2,17 +2,28 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Open Godot Editor",
-            "type": "node",
+            "name": "Main Scene",
+            "type": "godot",
             "request": "launch",
-            "runtimeExecutable": "/bin/zsh",
-            "runtimeArgs": [
-                "-lc",
-                "nohup \"${env:GODOT4_EXECUTABLE}\" --path \"${workspaceFolder}\" --editor >/dev/null 2>&1 < /dev/null &"
-            ],
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "internalConsoleOptions": "neverOpen"
+            "project": "${workspaceFolder}",
+            "address": "127.0.0.1",
+            "port": 6007,
+            "scene": "main",
+            "editor_path": "${env:GODOT4_EXECUTABLE}",
+            // engine command line flags
+            "profiling": false,
+            "single_threaded_scene": false,
+            "debug_collisions": false,
+            "debug_paths": false,
+            "debug_navigation": false,
+            "debug_avoidance": false,
+            "debug_stringnames": false,
+            "frame_delay": 0,
+            "time_scale": 1.0,
+            "disable_vsync": false,
+            "fixed_fps": 60,
+            // anything else
+            "additional_options": ""
         }
     ]
 }

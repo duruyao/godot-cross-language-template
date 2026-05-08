@@ -4,16 +4,14 @@
         {
             "label": "Godot: open project",
             "type": "shell",
-            "command": "\"${env:GODOT4_EXECUTABLE}\"",
+            "group": "build",
+            "command": "${env:GODOT4_EXECUTABLE}",
             "args": [
                 "--path",
                 "\"${workspaceFolder}\"",
                 "--editor"
             ],
             "isBackground": true,
-            "runOptions": {
-                "runOn": "folderOpen"
-            },
             "problemMatcher": [],
             "presentation": {
                 "reveal": "never",

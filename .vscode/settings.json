@@ -1,14 +1,29 @@
 {
     "files.autoSave": "afterDelay",
-    "chat.mcp.gallery.enabled": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*.uid": true,
+        "**/*.import": true,
+    },
+    "editor.fontSize": 16,
     "editor.formatOnSave": true,
+    "editor.wordWrapColumn": 120,
+    "chat.mcp.gallery.enabled": true,
     "chatgpt.composerEnterBehavior": "cmdIfMultiline",
     "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.fontSize": 14,
+    "workbench.tree.indent": 16,
+    "workbench.colorTheme": "Dark Modern",
+    "workbench.secondarySideBar.showLabels": false,
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
         "editor.wordWrap": "on"
     },
-    "editor.wordWrapColumn": 120,
     "python.terminal.activateEnvironment": false,
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
@@ -19,5 +34,30 @@
         "markdown": true,
         "scminput": false
     },
-    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}"
+    "[gdscript]": {
+        "editor.defaultFormatter": "DoHe.godot-format"
+    },
+    "godotFormatter.useSpaces": false,
+    "godotFormatter.indentSize": 4,
+    "godotFormatter.safe": false,
+    "godotFormatter.reorderCode": true,
+    "godotFormatter.enableLinter": true,
+    "godotFormatter.linterMaxLineLength": 120,
+    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}",
+    "explorer.fileNesting.enabled": false,
+    "explorer.fileNesting.patterns": {
+        "*.cs": "${capture}.cs.uid",
+        "*.gd": "${capture}.gd.uid",
+        "*.gdshader": "${capture}.gdshader.uid",
+        "*.svg": "${capture}.svg.import",
+        "*.png": "${capture}.png.import",
+        "*.jpg": "${capture}.jpg.import",
+        "*.jpeg": "${capture}.jpeg.import",
+        "*.webp": "${capture}.webp.import",
+        "*.wav": "${capture}.wav.import",
+        "*.ogg": "${capture}.ogg.import",
+        "*.mp3": "${capture}.mp3.import",
+        "*.atlas": "${capture}.atlas.import",
+        "*.skel": "${capture}.skel.import",
+    }
 }
