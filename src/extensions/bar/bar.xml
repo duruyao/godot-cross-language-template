@@ -16,5 +16,12 @@
 				Print the type of the variant.
 			</description>
 		</method>
+		<method name="say_hello" qualifiers="const">
+			<return type="void" />
+			<param index="0" name="sb" type="String" />
+			<description>
+				Say "hello" to somebody.
+			</description>
+		</method>
 	</methods>
 </class>
