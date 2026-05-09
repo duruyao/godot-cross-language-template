@@ -23,7 +23,7 @@
             "label": "SCons: build debug target",
             "type": "shell",
             "group": "build",
-            "command": "scons build_dir=scons-build-macos-template_debug platform=macos target=template_debug debug_symbols=yes && tree bin",
+            "command": "scons build_dir=scons-build-template_debug target=template_debug debug_symbols=yes && tree bin",
             "problemMatcher": "$gcc",
             "presentation": {
                 "panel": "dedicated",
@@ -34,7 +34,7 @@
             "label": "SCons: build release target",
             "type": "shell",
             "group": "build",
-            "command": "scons build_dir=scons-build-macos-template_release platform=macos target=template_release debug_symbols=no && tree bin",
+            "command": "scons build_dir=scons-build-template_release target=template_release debug_symbols=no && tree bin",
             "problemMatcher": "$gcc",
             "presentation": {
                 "panel": "dedicated",
@@ -45,7 +45,7 @@
             "label": "SCons: clean debug target",
             "type": "shell",
             "group": "build",
-            "command": "rm -f bin/macos/lib*.macos.template_debug.dylib(N) && tree bin",
+            "command": "scons --clean --dry-run build_dir=scons-build-template_debug target=template_debug debug_symbols=yes 2>&1 | rg '^Removed bin/' | sed 's/^Removed //' | xargs -r rm -f && tree bin",
             "problemMatcher": [],
             "presentation": {
                 "panel": "dedicated",
@@ -56,7 +56,7 @@
             "label": "SCons: clean release target",
             "type": "shell",
             "group": "build",
-            "command": "rm -f bin/macos/lib*.macos.template_release.dylib(N) && tree bin",
+            "command": "scons --clean --dry-run build_dir=scons-build-template_release target=template_release debug_symbols=no 2>&1 | rg '^Removed bin/' | sed 's/^Removed //' | xargs -r rm -f && tree bin",
             "problemMatcher": [],
             "presentation": {
                 "panel": "dedicated",
