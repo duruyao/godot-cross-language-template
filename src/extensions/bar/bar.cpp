@@ -1,8 +1,8 @@
 #include "bar/bar.hpp"
 
 void Bar::_bind_methods() {
-    godot::ClassDB::bind_method(D_METHOD("print_type", "variant"), &Bar::print_type);
-    godot::ClassDB::bind_method(D_METHOD("say_hello", "sb"), &Bar::say_hello);
+    ClassDB::bind_method(D_METHOD("print_type", "variant"), &Bar::print_type);
+    ClassDB::bind_method(D_METHOD("say_hello", "sb"), &Bar::say_hello);
 }
 
 void Bar::print_type(const Variant &p_variant) const {
