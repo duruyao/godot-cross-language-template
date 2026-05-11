@@ -14,11 +14,11 @@ This repository serves as a quickstart cross-language template for GDExtension d
 
 To use this template, log in to GitHub and click the green `Use this template` button at the top of the repository page. This will let you create a copy of this repository with a clean git history.
 
-Initialize the submodule [third-party/godot-cpp](third-party/godot-cpp).
+Initialize the submodules.
 
 ```shell
 # git: init submodule
-git submodule update --init --recursive third-party/godot-cpp
+git submodule update --init --recursive
 ```
 ### 2.1. Primary Build System: SCons
 
