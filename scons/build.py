@@ -4,11 +4,13 @@ from .file import write_gdextension_manifest
 
 
 def add_gdextension_library(
+    env: Environment,
     extension_name: str,
     godotcpp_src_dir: str,
     extension_src_dir: str,
     install_dir_prefix: str,
-    env: Environment,
+    extra_sources: list[str] | None = None,
+    extra_header_dirs: list[str] | None = None,
 ) -> list:
     lib_env = env.Clone()
     lib_env.AppendUnique(
@@ -19,7 +21,10 @@ def add_gdextension_library(
             f"{extension_src_dir}/..",
         ]
     )
+    lib_env.AppendUnique(CPPPATH=extra_header_dirs or [])
     lib_sources = env.Glob(f"{extension_src_dir}/*.cpp")
+    for source in extra_sources or []:
+        lib_sources.append(lib_env.File(source))
 
     if lib_env["target"] in ["editor", "template_debug"]:
         doc_source = lib_env.GodotCPPDocData(

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17 FATAL_ERROR)
 
-project(godot-cross-language-template
+project(godot-cpp-gdextensions
         VERSION 1.0
         DESCRIPTION "This repository serves as a quickstart cross-language template for GDExtension development with Godot 4.0+."
         HOMEPAGE_URL "https://github.com/duruyao/godot-cross-language-template/tree/main"
@@ -38,12 +38,12 @@ add_subdirectory("${godotcpp_src_dir}")
 
 include(AddGDExtensionLibrary)
 add_gdextension_library(foo
-        "${godotcpp_src_dir}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/foo"
-        "${PROJECT_SOURCE_DIR}"
+        GODOTCPP_SRC_DIR "${godotcpp_src_dir}"
+        EXTENSION_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/foo"
+        INSTALL_DIR_PREFIX "${PROJECT_SOURCE_DIR}"
 )
 add_gdextension_library(bar
-        "${godotcpp_src_dir}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/bar"
-        "${PROJECT_SOURCE_DIR}"
+        GODOTCPP_SRC_DIR "${godotcpp_src_dir}"
+        EXTENSION_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/extensions/bar"
+        INSTALL_DIR_PREFIX "${PROJECT_SOURCE_DIR}"
 )

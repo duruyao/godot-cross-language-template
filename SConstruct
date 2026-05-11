@@ -51,18 +51,18 @@ env = SConscript(
 
 targets = []
 targets += add_gdextension_library(
+    env=env,
     extension_name="foo",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/foo",
     install_dir_prefix=f"{project_root}",
-    env=env,
 )
 targets += add_gdextension_library(
+    env=env,
     extension_name="bar",
     godotcpp_src_dir=f"{build_dir}/{godotcpp_module_path}",
     extension_src_dir=f"{build_dir}/src/extensions/bar",
     install_dir_prefix=f"{project_root}",
-    env=env,
 )
 
 Default(*targets)
