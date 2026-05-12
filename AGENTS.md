@@ -32,11 +32,16 @@ This project is a Godot game project developed with multiple languages, includin
 ## Common Commands
 
 ```shell
-git submodule update --init --recursive third_party/godot-cpp
+# git: initialize submodules
+git submodule update --init --recursive
+# scons: build debug target
 scons build_dir=scons-build-template_debug target=template_debug debug_symbols=yes
+# scons: build release target
 scons build_dir=scons-build-template_release target=template_release debug_symbols=no
-godot --path .
-godot --path . --editor
+# godot: run project without opening editor
+$GODOT4_EXECUTABLE --path .
+# godot: open project in editor
+$GODOT4_EXECUTABLE --path . --editor
 ```
 
 Use the CMake commands from `doc/dev.md` when working on the CMake build path.
