@@ -17,7 +17,7 @@ To use this template, log in to GitHub and click the green `Use this template` b
 Initialize the submodules.
 
 ```shell
-# git: init submodule
+# git: initialize submodules
 git submodule update --init --recursive
 ```
 ### 2.1. Primary Build System: SCons
