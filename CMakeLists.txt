@@ -4,16 +4,18 @@ project(godot-cpp-gdextensions
         VERSION 1.0
         DESCRIPTION "This repository serves as a quickstart cross-language template for GDExtension development with Godot 4.0+."
         HOMEPAGE_URL "https://github.com/duruyao/godot-cross-language-template/tree/main"
-        LANGUAGES CXX
+        LANGUAGES C CXX
 )
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for macOS" FORCE)
 
-if(CMAKE_C_COMPILER)
-endif()
+set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for macOS" FORCE)
 
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/.gdignore" "")
 

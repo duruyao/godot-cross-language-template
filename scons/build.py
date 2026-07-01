@@ -11,6 +11,8 @@ def add_gdextension_library(
     install_dir_prefix: str,
     extra_sources: list[str] | None = None,
     extra_header_dirs: list[str] | None = None,
+    extra_compile_definitions: list[str] | None = None,
+    extra_compile_flags: list[str] | None = None,
 ) -> list:
     lib_env = env.Clone()
     lib_env.AppendUnique(
@@ -22,7 +24,11 @@ def add_gdextension_library(
         ]
     )
     lib_env.AppendUnique(CPPPATH=extra_header_dirs or [])
-    lib_sources = env.Glob(f"{extension_src_dir}/*.cpp")
+    lib_env.AppendUnique(CPPDEFINES=extra_compile_definitions or [])
+    lib_env.AppendUnique(CCFLAGS=extra_compile_flags or [])
+    lib_sources = []
+    for extension in ["c", "cc", "cpp", "cxx"]:
+        lib_sources.extend(env.Glob(f"{extension_src_dir}/*.{extension}"))
     for source in extra_sources or []:
         lib_sources.append(lib_env.File(source))
 

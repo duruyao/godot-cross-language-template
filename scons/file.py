@@ -1,4 +1,6 @@
 import os
+import re
+from pathlib import Path
 
 from .console import print_error
 
@@ -72,3 +74,57 @@ web.wasm32.double.release = "./web/lib{extension_name}.web.template_release.wasm
             file.write(file_content)
     except Exception as e:
         print_error(f"Error occurred while writing {file_path}: {e}")
+
+
+def write_geos_version(source_dir: str, file_path: str) -> None:
+    source_path = Path(source_dir)
+    output_path = Path(file_path)
+    version_text = (source_path / "Version.txt").read_text(encoding="utf-8")
+
+    version_major = _read_geos_version_value(version_text, "GEOS_VERSION_MAJOR")
+    version_minor = _read_geos_version_value(version_text, "GEOS_VERSION_MINOR")
+    version_patch = _read_geos_version_value(version_text, "GEOS_VERSION_PATCH")
+    version_patch_word = _read_geos_version_value(version_text, "GEOS_PATCH_WORD")
+    jts_port = _read_geos_version_value(version_text, "JTS_PORT")
+    version = f"{version_major}.{version_minor}.{version_patch}{version_patch_word}"
+
+    file_content = f"""#ifndef GEOS_VERSION_H_INCLUDED
+#define GEOS_VERSION_H_INCLUDED
+#define GEOS_VERSION_MAJOR {version_major}
+#define GEOS_VERSION_MINOR {version_minor}
+#define GEOS_VERSION_PATCH {version_patch}{version_patch_word}
+#define GEOS_VERSION "{version}"
+#define GEOS_JTS_PORT "{jts_port}"
+#endif
+"""
+
+    try:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(file_content, encoding="utf-8")
+    except Exception as e:
+        print_error(f"Error occurred while writing {file_path}: {e}")
+
+
+def _read_geos_version_value(version_text: str, name: str) -> str:
+    match = re.search(rf"^{name}=([0-9A-Za-z.]*)$", version_text, re.MULTILINE)
+    if not match:
+        raise ValueError(f"GEOS Version.txt is missing '{name}'")
+    return match.group(1)
+
+
+def map_file_paths(
+    extensions: list, real_directory: str, mapped_directory: str
+) -> list:
+    directory_path = Path(real_directory)
+    new_directory_path = Path(mapped_directory)
+    file_paths = []
+
+    for extension in extensions:
+        suffix = extension if extension.startswith(".") else f".{extension}"
+        for file_path in directory_path.rglob(f"*{suffix}"):
+            if file_path.is_file():
+                file_paths.append(
+                    str(new_directory_path / file_path.relative_to(directory_path))
+                )
+
+    return file_paths

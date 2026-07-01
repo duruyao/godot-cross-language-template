@@ -15,7 +15,6 @@
     "chat.mcp.gallery.enabled": true,
     "chatgpt.composerEnterBehavior": "cmdIfMultiline",
     "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.fontSize": 14,
     "workbench.tree.indent": 16,
     "workbench.colorTheme": "Dark Modern",
@@ -31,8 +30,9 @@
     "github.copilot.enable": {
         "*": true,
         "plaintext": false,
-        "markdown": true,
-        "scminput": false
+        "markdown": false,
+        "scminput": false,
+        "gdscene": false,
     },
     "[gdscript]": {
         "editor.defaultFormatter": "DoHe.godot-format"

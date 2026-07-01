@@ -48,6 +48,8 @@ VariantDir(build_dir, project_root, duplicate=False)
 env = SConscript(
     f"{build_dir}/{godotcpp_module_path}/SConstruct", {"env": env, "customs": customs}
 )
+env.AppendUnique(CFLAGS=["-std=c99"])
+env.AppendUnique(CXXFLAGS=["-std=c++17"])
 
 targets = []
 targets += add_gdextension_library(
