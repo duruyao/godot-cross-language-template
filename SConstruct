@@ -2,7 +2,7 @@ import os
 import sys
 from pathlib import Path
 
-from SCons.Script import (
+from SCons.Script import (  # type: ignore[reportMissingImports]
     Default,
     Dir,
     Environment,
