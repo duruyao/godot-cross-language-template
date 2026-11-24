@@ -72,7 +72,7 @@ web.wasm32.double.release = "./web/lib{extension_name}.web.template_release.wasm
     try:
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(file_content)
-    except Exception as e:
+    except OSError as e:
         print_error(f"Error occurred while writing {file_path}: {e}")
 
 
@@ -101,7 +101,7 @@ def write_geos_version(source_dir: str, file_path: str) -> None:
     try:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(file_content, encoding="utf-8")
-    except Exception as e:
+    except OSError as e:
         print_error(f"Error occurred while writing {file_path}: {e}")
 
 

@@ -22,12 +22,20 @@ Build multiple C++ GDExtension libraries via SCons.
 
 ```shell
 # scons: build debug target
-scons build_dir=scons-build-template_debug target=template_debug debug_symbols=yes
+scons build_dir=scons-build-template_debug \
+    target=template_debug \
+    api_version=4.7 \
+    debug_symbols=yes \
+    dev_build=yes
 ```
 
 ```shell
 # scons: build release target
-scons build_dir=scons-build-template_release target=template_release debug_symbols=no
+scons build_dir=scons-build-template_release \
+    target=template_release \
+    api_version=4.7 \
+    debug_symbols=no \
+    dev_build=no
 ```
 
 ### 2.2. Secondary Build System: CMake
@@ -36,13 +44,19 @@ Build multiple C++ GDExtension libraries via CMake.
 
 ```shell
 # cmake: build debug target
-cmake -S . -B cmake-build-template_debug -DGODOTCPP_TARGET=template_debug -DCMAKE_BUILD_TYPE=Debug
+cmake -S . -B cmake-build-template_debug \
+    -DGODOTCPP_TARGET=template_debug \
+    -DGODOTCPP_API_VERSION=4.7 \
+    -DCMAKE_BUILD_TYPE=Debug
 cmake --build cmake-build-template_debug -j 8
 ```
 
 ```shell
 # cmake: build release target
-cmake -S . -B cmake-build-template_release -DGODOTCPP_TARGET=template_release -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B cmake-build-template_release \
+    -DGODOTCPP_TARGET=template_release \
+    -DGODOTCPP_API_VERSION=4.7 \
+    -DCMAKE_BUILD_TYPE=Release
 cmake --build cmake-build-template_release -j 8
 ```
 

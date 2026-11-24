@@ -1,15 +1,18 @@
 {
     "recommendations": [
-        "GitHub.copilot-chat",
-        "ms-vscode.cpptools-extension-pack",
-        "xaver.clang-format",
-        "wysaid.clion-cmake-format",
-        "openai.chatgpt",
-        "geequlim.godot-tools",
+        "alfish.godot-files",
+        "charliermarsh.ruff",
         "geequlim.godot-formatter",
-        "yzhang.markdown-all-in-one",
-        "shd101wyy.markdown-preview-enhanced",
+        "geequlim.godot-tools",
+        "GitHub.copilot-chat",
         "ms-python.python",
-        "charliermarsh.ruff"
+        "ms-vscode.cpptools-extension-pack",
+        "openai.chatgpt",
+        "pucelle.run-on-save",
+        "shd101wyy.markdown-preview-enhanced",
+        "Thinker.sort-json",
+        "wysaid.clion-cmake-format",
+        "xaver.clang-format",
+        "yzhang.markdown-all-in-one"
     ]
 }

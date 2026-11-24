@@ -17,7 +17,6 @@ from scons import (
     print_error,
 )
 
-
 vars = Variables()
 vars.Add(
     "build_dir",
@@ -40,7 +39,7 @@ if not Path(f"{project_root}/{godotcpp_module_path}/src").is_dir():
     print_error(f"""godot-cpp bindings source not found.
 Run the following command to initialize/update the godot-cpp submodule:
 
-    git submodule update --init --recursive {godotcpp_module_path}""")
+    git submodule update --init --recursive --depth 1 {godotcpp_module_path}""")
     sys.exit(1)
 
 VariantDir(build_dir, project_root, duplicate=False)

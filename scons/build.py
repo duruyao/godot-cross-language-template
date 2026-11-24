@@ -17,9 +17,6 @@ def add_gdextension_library(
     lib_env = env.Clone()
     lib_env.AppendUnique(
         CPPPATH=[
-            f"{godotcpp_src_dir}",
-            f"{godotcpp_src_dir}/include",
-            f"{godotcpp_src_dir}/gen/include",
             f"{extension_src_dir}/..",
         ]
     )

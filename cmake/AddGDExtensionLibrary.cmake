@@ -34,7 +34,7 @@ function(add_gdextension_library EXTENSION_NAME)
     endif()
 
     target_link_libraries("${EXTENSION_NAME}" PRIVATE godot-cpp)
-    target_include_directories("${EXTENSION_NAME}" PRIVATE "${ARG_GODOTCPP_SRC_DIR}" "${ARG_GODOTCPP_SRC_DIR}/include" "${ARG_GODOTCPP_SRC_DIR}/gen/include" "${ARG_EXTENSION_SRC_DIR}/.." ${ARG_EXTRA_HEADER_DIRS})
+    target_include_directories("${EXTENSION_NAME}" PRIVATE "${ARG_EXTENSION_SRC_DIR}/.." ${ARG_EXTRA_HEADER_DIRS})
     target_compile_definitions("${EXTENSION_NAME}" PRIVATE ${ARG_EXTRA_COMPILE_DEFINITIONS})
     target_compile_options("${EXTENSION_NAME}" PRIVATE ${ARG_EXTRA_COMPILE_FLAGS})
 

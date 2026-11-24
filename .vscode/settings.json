@@ -1,63 +1,74 @@
 {
-    "files.autoSave": "afterDelay",
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/*.uid": true,
-        "**/*.import": true,
-    },
-    "editor.fontSize": 16,
-    "editor.formatOnSave": true,
-    "editor.wordWrapColumn": 120,
-    "chat.mcp.gallery.enabled": true,
-    "chatgpt.composerEnterBehavior": "cmdIfMultiline",
-    "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.fontSize": 14,
-    "workbench.tree.indent": 16,
-    "workbench.colorTheme": "Dark Modern",
-    "workbench.secondarySideBar.showLabels": false,
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-        "editor.wordWrap": "on"
-    },
-    "python.terminal.activateEnvironment": false,
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
-    },
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "gdscene": false,
     },
     "[gdscript]": {
         "editor.defaultFormatter": "DoHe.godot-format"
     },
-    "godotFormatter.useSpaces": false,
-    "godotFormatter.indentSize": 4,
-    "godotFormatter.safe": false,
-    "godotFormatter.reorderCode": true,
-    "godotFormatter.enableLinter": true,
-    "godotFormatter.linterMaxLineLength": 120,
-    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}",
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+        "editor.wordWrap": "on"
+    },
+    "chat.mcp.gallery.enabled": true,
+    "chatgpt.composerEnterBehavior": "cmdIfMultiline",
+    "editor.fontSize": 16,
+    "editor.formatOnSave": true,
+    "editor.wordWrapColumn": 120,
     "explorer.fileNesting.enabled": false,
     "explorer.fileNesting.patterns": {
+        "*.atlas": "${capture}.atlas.import",
         "*.cs": "${capture}.cs.uid",
         "*.gd": "${capture}.gd.uid",
         "*.gdshader": "${capture}.gdshader.uid",
-        "*.svg": "${capture}.svg.import",
-        "*.png": "${capture}.png.import",
-        "*.jpg": "${capture}.jpg.import",
         "*.jpeg": "${capture}.jpeg.import",
-        "*.webp": "${capture}.webp.import",
-        "*.wav": "${capture}.wav.import",
-        "*.ogg": "${capture}.ogg.import",
+        "*.jpg": "${capture}.jpg.import",
         "*.mp3": "${capture}.mp3.import",
-        "*.atlas": "${capture}.atlas.import",
+        "*.ogg": "${capture}.ogg.import",
+        "*.png": "${capture}.png.import",
         "*.skel": "${capture}.skel.import",
-    }
+        "*.svg": "${capture}.svg.import",
+        "*.wav": "${capture}.wav.import",
+        "*.webp": "${capture}.webp.import"
+    },
+    "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "**/*.import": true,
+        "**/*.uid": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/Thumbs.db": true
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "gdscene": false,
+        "markdown": false,
+        "plaintext": false,
+        "scminput": false
+    },
+    "godotFormatter.enableLinter": true,
+    "godotFormatter.indentSize": 4,
+    "godotFormatter.linterMaxLineLength": 120,
+    "godotFormatter.reorderCode": true,
+    "godotFormatter.useSpaces": false,
+    "godotTools.editorPath.godot4": "${env:GODOT4_EXECUTABLE}",
+    "python.terminal.activateEnvironment": false,
+    "runOnSave.commands": [
+        {
+            "match": "\\.(gdshader|gdshaderinc)$",
+            "command": "clang-format \"--style={BasedOnStyle: InheritParentConfig, UseTab: Always}\" -i -- \"${file}\"",
+            "finishStatusMessage": "GDShader formatted.",
+            "clearOutput": true,
+            "runIn": "backend"
+        }
+    ],
+    "runOnSave.onlyRunOnManualSave": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.fontSize": 14,
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Dark Modern",
+    "workbench.preferredLightColorTheme": "Light Modern",
+    "workbench.secondarySideBar.showLabels": false,
+    "workbench.tree.indent": 16
 }

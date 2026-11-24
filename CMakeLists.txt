@@ -27,7 +27,7 @@ if(NOT EXISTS "${godotcpp_src_dir}/src")
     message(NOTICE "initializing/updating the godot-cpp submodule...")
 
     find_program(GIT git REQUIRED)
-    execute_process(COMMAND "${GIT}" submodule update --init --recursive "${godotcpp_submodule_path}"
+    execute_process(COMMAND "${GIT}" submodule update --init --recursive --depth 1 "${godotcpp_submodule_path}"
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
             COMMAND_ERROR_IS_FATAL ANY
     )
