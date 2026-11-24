@@ -4,7 +4,7 @@
 		Example class Bar.
 	</brief_description>
 	<description>
-		An example class named Bar.
+		An example class named "Bar".
 	</description>
 	<tutorials>
 	</tutorials>
@@ -13,14 +13,14 @@
 			<return type="void" />
 			<param index="0" name="variant" type="Variant" />
 			<description>
-				Print the type of the variant.
+				Prints the type of the variant.
 			</description>
 		</method>
 		<method name="say_hello" qualifiers="const">
 			<return type="void" />
 			<param index="0" name="sb" type="String" />
 			<description>
-				Say "hello" to somebody.
+				Says "Hello" to somebody.
 			</description>
 		</method>
 	</methods>
